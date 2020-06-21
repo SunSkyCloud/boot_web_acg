@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>订单管理</title>
+
+		<link th:href="@{/css/admin.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/amazeui.css}" rel="stylesheet" type="text/css">
+
+		<link th:href="@{/css/personal.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/orstyle.css}" rel="stylesheet" type="text/css">
+
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/amazeui.js}"></script>
+
+	</head>
+
+	<body>
+	<div id="header">ACG乐享</div>
+	<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-order">
+
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Order</small></div>
+						</div>
+						<hr/>
+
+						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
+								<li class="am-active"><a href="#tab1">所有订单</a></li>
+								<li><a href="#tab2">待付款</a></li>
+								<li><a href="#tab3">待发货</a></li>
+								<li><a href="#tab4">待收货</a></li>
+								<li><a href="#tab5">待评价</a></li>
+							</ul>
+
+							<div class="am-tabs-bd">
+								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">商品操作</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">交易状态</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main">
+										<div class="order-list" th:each=" order : ${orderList}">
+											
+											<!--交易成功-->
+											<div class="order-status5">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;" th:text="${order.num}">1601430</a></div>
+													<span th:text="${order.transTime}">成交时间：2020-6-10</span>
+													<!--    <em>店铺：小桔灯</em>-->
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="../static/images/伊芙琳.jpg" class="itempic J_ItemImg" th:src="${order.goodsImg}">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p th:text="${order.goodsName}">伊芙琳</p>
+																			<p class="info-little">颜色：<span th:text="${order.goodsColor}">彩色</span>
+																				<br/>包装：<span th:text="${order.goodsPack}">裸装</span> </p>
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	<span th:text="${order.unit}">510.00</span>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>×</span><span th:text="${order.num}">1</span>
+																</div>
+															</li>
+															<li class="td td-operation">
+																<div class="item-operation">
+																	
+																</div>
+															</li>
+														</ul>
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																合计：<span th:text="${order.totalMoney}">520.00</span>
+																<p>含运费：<span>10.00</span></p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="Mystatus">交易成功</p>
+																	<p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+																	<p class="order-info"><a href="logistics.html">查看物流</a></p>
+																</div>
+															</li>
+															<li class="td td-change">
+																<div class="am-btn am-btn-danger anniu">
+																	删除订单</div>
+															</li>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+								<div class="am-tab-panel am-fade" id="tab2">
+
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">商品操作</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">交易状态</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main" th:each="order:${orderList}" th:if="${order.status==1}">
+										<div class="order-list">
+											<div class="order-status1">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;" th:text="${order.orderNo}">1601430</a></div>
+													<span th:text="${order.transTime}">成交时间：2020-6-10</span>
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="../images/伊芙琳.jpg" class="itempic J_ItemImg" th:src="${order.goodsImg}">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>伊芙琳</p>
+																			<p class="info-little">颜色：<span th:text="${order.goodsColor}">彩色</span>
+																				<br/>包装：<span th:text="${order.goodsPack}">裸装</span> </p>
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	<span th:text="${order.unit}">510.00</span>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>×</span><span th:text="${order.num}">1</span>
+																</div>
+															</li>
+															<li class="td td-operation">
+																<div class="item-operation">
+
+																</div>
+															</li>
+														</ul>
+
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																合计：<span th:text="${order.totalMoney}">520.00</span>
+																<p>含运费：<span>10.00</span></p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="Mystatus">等待买家付款</p>
+																	<p class="order-info"><a href="#">取消订单</a></p>
+
+																</div>
+															</li>
+															<li class="td td-change">
+																<a href="../home/pay.html">
+																<div class="am-btn am-btn-danger anniu">
+																	一键支付</div></a>
+															</li>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="am-tab-panel am-fade" id="tab3">
+
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">商品操作</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">交易状态</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main" th:each="order:${orderList}" th:if="${order.status==2}">
+										<div class="order-list">
+											<div class="order-status1">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;" th:text="${order.orderNo}">1601430</a></div>
+													<span th:text="${order.transTime}">成交时间：2020-6-10</span>
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="../images/伊芙琳.jpg" class="itempic J_ItemImg" th:src="${order.goodsImg}">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>伊芙琳</p>
+																			<p class="info-little">颜色：<span th:text="${order.goodsColor}">彩色</span>
+																				<br/>包装：<span th:text="${order.goodsPack}">裸装</span> </p>
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	<span th:text="${order.unit}">510.00</span>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>×</span><span th:text="${order.num}">1</span>
+																</div>
+															</li>
+															<li class="td td-operation">
+																<div class="item-operation">
+
+																</div>
+															</li>
+														</ul>
+
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																合计：<span th:text="${order.totalMoney}">520.00</span>
+																<p>含运费：<span>10.00</span></p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="Mystatus">等待买家付款</p>
+																	<p class="order-info"><a href="#">取消订单</a></p>
+
+																</div>
+															</li>
+															<li class="td td-change">
+																<a href="../home/pay.html">
+																	<div class="am-btn am-btn-danger anniu">
+																		一键支付</div></a>
+															</li>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="am-tab-panel am-fade" id="tab4">
+
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">商品操作</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">交易状态</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main" th:each="order:${orderList}" th:if="${order.status==3}">
+										<div class="order-list">
+											<div class="order-status1">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;" th:text="${order.orderNo}">1601430</a></div>
+													<span th:text="${order.transTime}">成交时间：2020-6-10</span>
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="../images/伊芙琳.jpg" class="itempic J_ItemImg" th:src="${order.goodsImg}">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>伊芙琳</p>
+																			<p class="info-little">颜色：<span th:text="${order.goodsColor}">彩色</span>
+																				<br/>包装：<span th:text="${order.goodsPack}">裸装</span> </p>
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	<span th:text="${order.unit}">510.00</span>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>×</span><span th:text="${order.num}">1</span>
+																</div>
+															</li>
+															<li class="td td-operation">
+																<div class="item-operation">
+
+																</div>
+															</li>
+														</ul>
+
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																合计：<span th:text="${order.totalMoney}">520.00</span>
+																<p>含运费：<span>10.00</span></p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="Mystatus">等待买家付款</p>
+																	<p class="order-info"><a href="#">取消订单</a></p>
+
+																</div>
+															</li>
+															<li class="td td-change">
+																<a href="../home/pay.html">
+																	<div class="am-btn am-btn-danger anniu">
+																		一键支付</div></a>
+															</li>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="am-tab-panel am-fade" id="tab5">
+
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">商品操作</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">交易状态</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">交易操作</td>
+										</div>
+									</div>
+
+									<div class="order-main" th:each="order:${orderList}" th:if="${order.status==4}">
+										<div class="order-list">
+											<div class="order-status1">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;" th:text="${order.orderNo}">1601430</a></div>
+													<span th:text="${order.transTime}">成交时间：2020-6-10</span>
+												</div>
+												<div class="order-content">
+													<div class="order-left">
+														<ul class="item-list">
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="../images/伊芙琳.jpg" class="itempic J_ItemImg" th:src="${order.goodsImg}">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>伊芙琳</p>
+																			<p class="info-little">颜色：<span th:text="${order.goodsColor}">彩色</span>
+																				<br/>包装：<span th:text="${order.goodsPack}">裸装</span> </p>
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	<span th:text="${order.unit}">510.00</span>
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>×</span><span th:text="${order.num}">1</span>
+																</div>
+															</li>
+															<li class="td td-operation">
+																<div class="item-operation">
+
+																</div>
+															</li>
+														</ul>
+
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																合计：<span th:text="${order.totalMoney}">520.00</span>
+																<p>含运费：<span>10.00</span></p>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="Mystatus">等待买家付款</p>
+																	<p class="order-info"><a href="#">取消订单</a></p>
+
+																</div>
+															</li>
+															<li class="td td-change">
+																<a href="../home/pay.html">
+																	<div class="am-btn am-btn-danger anniu">
+																		一键支付</div></a>
+															</li>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
